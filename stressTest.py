@@ -6,6 +6,7 @@ from synapseclient import File
 
 syn = synapseclient.login()
 
+dataProjectId = 'syn17018506'
 encryptedProjectId = 'syn17016492'
 unencryptedProjectId = 'syn17016502'
 encryptedBucketName = 'plfm-5212-encrypted-bucket'
@@ -43,3 +44,5 @@ for file_size_kb in [1, 1024, 1024 * 5, 1024 * 50, 1024 * 100, 1024 * 1024]:
     df = df.append(upload_download_test(num_files=10, file_size_kb=file_size_kb))
 
 df.to_csv("output_data.csv", index = False)
+
+syn.store(File(path="output_data.csv", parent=dataProjectId))

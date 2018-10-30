@@ -1,4 +1,5 @@
 import os, sys
+from time import gmtime, strftime
 import stressTestFunctions as util
 import pandas as pd
 import synapseclient
@@ -40,6 +41,7 @@ df = pd.DataFrame()
 for file_size_kb in [1, 1024, 1024 * 5, 1024 * 50, 1024 * 100, 1024 * 1024]:
     df = df.append(upload_download_test(num_files=10, file_size_kb=file_size_kb))
 
-df.to_csv("output_data.csv", index = False)
+outfile = "output_data_" + strftime("%Y-%m-%d-%H:%M:%S", gmtime()) + ".csv"
+df.to_csv(outfile, index = False)
 
-syn.store(File(path="output_data.csv", parent=dataProjectId))
+syn.store(File(path=outfile, parent=dataProjectId))

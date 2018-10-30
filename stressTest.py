@@ -38,8 +38,8 @@ def upload_download_test(num_files, file_size_kb):
 df = pd.DataFrame()
 
 # Test 1KB, 1MB, 5MB, 50MB, 100MB, 1GB
-for file_size_kb in [1, 1024, 1024 * 5, 1024 * 50, 1024 * 100, 1024 * 1024]:
-    df = df.append(upload_download_test(num_files=10, file_size_kb=file_size_kb))
+for file_size_kb in [1, 1024, 1024 * 10, 1024 * 50, 1024 * 100, 1024 * 500, 1024 * 1024]:
+    df = df.append(upload_download_test(num_files=25, file_size_kb=file_size_kb))
 
 outfile = "output_data_" + strftime("%Y-%m-%d_%H-%M-%S", gmtime()) + ".csv"
 df.to_csv(outfile, index = False)

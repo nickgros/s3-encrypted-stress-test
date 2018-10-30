@@ -1,4 +1,5 @@
 import os, sys
+import shutil
 import json
 import time
 import numpy as np
@@ -46,6 +47,7 @@ def timedFileUpload(filepath, project_id):
 
 
 def timedFileDownload(entity):
+    shutil.rmtree(synapseclient.cache.CACHE_ROOT_DIR)
     start = time.time()
     syn.get(entity)
     end = time.time()

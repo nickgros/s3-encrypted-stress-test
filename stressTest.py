@@ -19,17 +19,14 @@ def upload_download_test(num_files, file_size_kb):
     # Empty the project space beforehand
     util.deleteAllFilesFromProject(unencryptedProjectId)
     util.deleteAllFilesFromProject(encryptedProjectId)
-
     # Test the unencrypted bucket and empty it
     unencrypted_up_times = util.uploadStressTest(num_files, file_size_kb, unencryptedProjectId)
     unencrypted_down_times = util.downloadStressTest(unencryptedProjectId)
     util.deleteAllFilesFromProject(unencryptedProjectId)
-
     # Test the encrypted bucket and empty it
     encrypted_up_times = util.uploadStressTest(num_files, file_size_kb, encryptedProjectId)
     encrypted_down_times = util.downloadStressTest(encryptedProjectId)
     util.deleteAllFilesFromProject(encryptedProjectId)
-
     # Assemble the dataframe and return it
     df = pd.DataFrame({"time": unencrypted_up_times, "bucket": "unencrypted", "type": "upload", "file_size": file_size_kb})
     df = df.append(pd.DataFrame({"time": encrypted_up_times, "bucket": "encrypted", "type": "upload", "file_size": file_size_kb}))
